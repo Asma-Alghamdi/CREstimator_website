@@ -1,5 +1,5 @@
 import React from "react";
-import "./dataset.css";
+import "./crestimator_website.css";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import {Link, useLocation} from "react-router-dom";
@@ -12,6 +12,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
+//Style of table cells
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.common.black,
@@ -33,13 +34,14 @@ function Result() {
   const classes = useStyles();
     let location = useLocation();
 
+    //Import the figure
     const figure = location.state.figurePath
-   
     const frame_figure = require(`./output/${figure}`).default; 
-    const videoPath = location.state.path;
-  const videoName = videoPath[0].split("/videos");
 
-  const videoView = require(`./videos${videoName[1]}`).default;
+    //Import the video
+    const videoPath = location.state.path;
+    const videoName = videoPath[0].split("/videos");
+    const videoView = require(`./videos${videoName[1]}`).default;
 
 	return (<>
  <div style={{ padding: 60 }}>
