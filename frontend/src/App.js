@@ -3,7 +3,7 @@ import {render} from "react-dom";
 import Homepage from "./components/HomePage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import  Navigation from "./components/Navigation";
-//import UploadPage from "./components/UploadPage";
+import UploadPage from "./components/UploadPage";
 //import  Cards from "./components/cards";
 import Footer from "./components/Footer";
 //import About from "./components/About";
@@ -26,6 +26,7 @@ export default class App extends Component{
         <Navigation />
         <Switch>
           <Route path="/" exact component={() => <Homepage />} />
+          <Route path="/UploadPage" exact component={() => <UploadPage />} />
         </Switch>
         <Footer />
       </Router>
@@ -41,7 +42,7 @@ render(<App />, appDiv);
 
 /**
      
-          <Route path="/UploadPage" exact component={() => <UploadPage />} />
+          
           <Route path="/DatasetPage" exact component={() => <Cards />} />
           <Route path="/About" exact component={() => <About />} />
           <Route path="/Contact" exact component={() => <Contact />} />
