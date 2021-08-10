@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {render} from "react-dom";
-//import Homepage from "./components/HomePage";
+import Homepage from "./components/HomePage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import  Navigation from "./components/Navigation";
 //import UploadPage from "./components/UploadPage";
@@ -25,7 +25,7 @@ export default class App extends Component{
       <Router>
         <Navigation />
         <Switch>
-    
+          <Route path="/" exact component={() => <Homepage />} />
         </Switch>
         <Footer />
       </Router>
@@ -37,3 +37,15 @@ export default class App extends Component{
 
 const appDiv = document.getElementById("app");
 render(<App />, appDiv);
+
+
+/**
+     
+          <Route path="/UploadPage" exact component={() => <UploadPage />} />
+          <Route path="/DatasetPage" exact component={() => <Cards />} />
+          <Route path="/About" exact component={() => <About />} />
+          <Route path="/Contact" exact component={() => <Contact />} />
+          <Route path="/Result" exact component={() => <Result />} />
+          <Route path="/CardInfo" exact component={() => <CardInfo />} />
+       
+ */
