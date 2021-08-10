@@ -1,0 +1,107 @@
+
+.box {
+   /* border-width: medium;
+    border-color: rgba(179, 228, 228, 0.397);
+    box-shadow: rgb(100, 100, 100);*/
+    border-radius: 10px;
+    margin: 15px;
+}
+
+.bodyImg {
+    border-radius: 10px 10px 0px 0px;
+    height: 200px;
+}
+
+.bodytext{
+background-color: rgba(179, 228, 228, 0.397);
+}
+  
+
+.buttonStyle{
+    margin-bottom: 2px;
+  color: black;
+  background-color: rgb(179, 228, 228);
+  border-radius: 10px;
+  padding: 10px;
+  
+}
+
+.buttonStyle:hover{
+  color: aliceblue;
+  background-color: #0097A7;
+}
+
+.buttonStyle2{
+  margin-bottom: 2px;
+color: black;
+background-color: rgb(179, 228, 228);
+border-radius: 10px;
+padding: 10px 80px 10px 80px;
+
+
+}
+
+.buttonStyle2:hover{
+color: aliceblue;
+background-color: #0097A7;
+}
+
+
+
+.grid {
+   
+ /* min-height: 100%;*/
+   display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+ 
+  
+}
+
+
+
+.grid > div {
+  flex-basis: calc(30% - 40px);
+}
+
+
+.box:hover {
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -o-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.rowC{display:flex;  flex-wrap: wrap; flex-direction:row;}
+
+
+.fillterPosisition{
+    position: "sticky"; 
+}
+
+.resultBox{
+ background-color: #EEEEEE;
+ border-radius: 5px;
+ /*margin-left: 80px;*/
+ padding: 10px 50px 10px 50px;
+}
+
+
+.estimateButtonStyle {
+  padding: 10px 80px 10px 80px;
+  color: black;
+  size: 60px;
+  border-radius: 7px;
+  background-color: rgb(179, 228, 228);
+  
+}
+
+.estimateButtonStyle:hover {
+  background-color: #FFD966;
+  color: aliceblue;
+}
+
+
+
+
+
