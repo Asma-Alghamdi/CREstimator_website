@@ -815,7 +815,7 @@ async def read_root() -> dict:
 
 @app.get("/user", tags=["user"])
 async def get_users() -> dict:
-    return usersEntity(conn.blog.users.find())
+    return usersEntity(conn.gradProject.users.find())
 
 
 @app.post("/user", tags=["user"])
@@ -824,10 +824,10 @@ async def add_user(user: dict) -> dict:
     user_exists = False
     
     # Checks if an email exists from the collection of users
-    if conn.blog.users.find({'email': user['email']}).count() > 0:
+    if conn.gradProject.users.find({'email': user['email']}).count() > 0:
         user_exists = True
         print("User Exists")
-        activeuser = conn.blog.users.find({'email': user['email']})
+        activeuser = conn.gradProject.users.find({'email': user['email']})
         for actuser in activeuser:
             actuser = dict(actuser)
             # Converted the user ObjectId to str! so this can be stored into a session(how login works)
@@ -836,9 +836,9 @@ async def add_user(user: dict) -> dict:
 
     # If the email doesn't exist, create the user
     elif user_exists == False:
-        conn.blog.users.insert_one(user)
+        conn.gradProject.users.insert_one(user)
         print("User Created")
-        activeuser = conn.blog.users.find({'email': user['email']})
+        activeuser = conn.gradProject.users.find({'email': user['email']})
         for actuser in activeuser:
             actuser = dict(actuser)
             # Converted the user ObjectId to str! so this can be stored into a session(how login works)
@@ -848,7 +848,7 @@ async def add_user(user: dict) -> dict:
 ######################################-----GET and POST video information-----######################################
 
 def get_user_email(id):
-    activeuser = conn.blog.users.find()
+    activeuser = conn.gradProject.users.find()
     activeuser_id=""
     for actuser in activeuser:
         actuser = dict(actuser)
@@ -862,7 +862,7 @@ def get_user_email(id):
 
 @app.get("/video", tags=["video"])
 async def get_video() -> dict:
-    return videosEntity(conn.blog.videos.find())
+    return videosEntity(conn.gradProject.videos.find())
 
 
 
@@ -888,7 +888,7 @@ async def add_video(video: dict) -> dict:
     video["coverPic"]=coverPic
     video["figurePath"]=figurePath
     print(video)
-    conn.blog.videos.insert_one(dict(video))
+    conn.gradProject.videos.insert_one(dict(video))
     
     if  video["sendEmail"]:
         email=get_user_email(video["userId"])
@@ -901,7 +901,7 @@ async def add_video(video: dict) -> dict:
 
 @app.get("/card", tags=["card"])
 async def get_cards() -> dict:
-    n=videosEntity(conn.blog.videos.find())
+    n=videosEntity(conn.gradProject.videos.find())
     m=[]
     for x in n:
         if x['publish']:
@@ -913,7 +913,7 @@ async def get_cards() -> dict:
 
 @app.get("/title", tags=["title"])
 async def get_title() -> dict:
-    n=videosEntity(conn.blog.videos.find())
+    n=videosEntity(conn.gradProject.videos.find())
     m=[]
     for x in n:
         m.append(x["name"])
@@ -922,7 +922,7 @@ async def get_title() -> dict:
 
 @app.get("/countries", tags=["countries"])
 async def get_countries() -> dict:
-    n=conn.blog.videos.distinct("country")
+    n=conn.gradProject.videos.distinct("country")
     item = ["country"]
 
     m=[]
