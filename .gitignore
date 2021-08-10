@@ -1,1 +1,11 @@
 //static 
+backend/model/*
+backend/app/videos/*
+frontend/src/components/images/*
+
+
+//Auto generated
+Pipfile
+Pipfile.lock
+frontend/src/components/videos/*
+frontend/src/components/output/*
