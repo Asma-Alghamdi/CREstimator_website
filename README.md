@@ -3,7 +3,12 @@
 This repository contains the code of my graduation project. It is a system called Contact Rate Estimator (CREstimator) to provide the public health authorities and epidemic modelling researchers with the value of contact rate. CREstimator provides two services for the target users. The first service allows the user to upload their video and add information about it, such as the location name, the date in which the video was taken, the setting type, and the event name. Then the system estimates the value of the contact rate for this video based on image processing algorithms. Also, the system gives the user option to publish their data on the website. Additionally, the user can receive a notification when the process is done. The second service provides a library of videos and their information and the estimated value of the contact rate. The user can search about the value of the contact rate for a specific place and filter the results. The following figure shows the conceptual model of the CREstimator system.
 
 
-![The conceptual model of CREstimator system.] (C:/Users/Asma/Desktop/Projects/CREstimator_website/frontend/src/components/images/Conceptual model.png)*Conceptual Model of CREstimator System.*
+![Conceptual model](https://user-images.githubusercontent.com/85047564/129211098-5ae38043-2a15-4db1-b41a-f392476c496e.png)*Conceptual Model of CREstimator System.*
+
+
+## Demo
+
+[![IMAGE ALT TEXT HERE](https://youtu.be/gpTlLaBJQLI/0.jpg)](https://youtu.be/gpTlLaBJQLI)
 
 npm install --save react-router-dom
 npm install @material-ui/core
