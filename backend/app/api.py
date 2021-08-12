@@ -39,15 +39,15 @@ from bson import ObjectId
 
 ######################################-----Inialize Email Server-----#############################
 
-server = smtplib.SMTP(host='smtp.gmail.com', port=587)
-
-server.starttls()
-
-server.login("crestimator.website@gmail.com","CREzsa1998")
-
 #send email
 
 def sendEmail(email):
+    
+    server = smtplib.SMTP(host='smtp.gmail.com', port=587)
+
+    server.starttls()
+
+    server.login("crestimator.website@gmail.com","CREzsa1998")
 
     msg="""\
 Subject: Your results are prepared!
@@ -938,6 +938,13 @@ async def get_countries() -> dict:
 async def send_email_contact(formMessege: dict) -> dict:
 
     print(formMessege)
+
+    server = smtplib.SMTP(host='smtp.gmail.com', port=587)
+
+    server.starttls()
+
+    server.login("crestimator.website@gmail.com","CREzsa1998")
+    
     msg="""\
 Subject: Contact Us messege
 
