@@ -8,7 +8,8 @@ This repository contains the code of my graduation project. It is a system calle
 
 ## Demo
 
-[![IMAGE ALT TEXT HERE](https://youtu.be/gpTlLaBJQLI/0.jpg)](https://youtu.be/gpTlLaBJQLI)
+[![The demo of the CREstimator website](https://user-images.githubusercontent.com/85047564/129215693-00717c14-e90b-40b0-8726-d6555df8f91e.png)](https://youtu.be/gpTlLaBJQLI)
+
 
 npm install --save react-router-dom
 npm install @material-ui/core
