@@ -25,7 +25,7 @@ To install the required packages, in your *Command-line*:
 
 **for the frontend:**
 
-The used version of Node.js is ***(v14.16.0)****
+The used version of Node.js is ***(v14.16.0)***
 
 The required packages for the project are:
 ```
