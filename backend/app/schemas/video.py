@@ -6,7 +6,6 @@ def videoEntity(item) -> dict:
         "Placename": item["Placename"],
         "setting": item["setting"],
         "country": item["country"],
-        #"city": item["city"],
         "duration": item["duration"],
         "date": item["date"],
         "sendEmail": item["sendEmail"],

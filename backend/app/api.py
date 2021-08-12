@@ -488,7 +488,7 @@ def compute_color_for_labels(label):
 
 
 
-
+#Estimate the contact rate
 def estimate_contact_rate(video,title,userDuration, weights,config,classes):
     weights = weights
     config = config
@@ -755,9 +755,10 @@ def estimate_contact_rate(video,title,userDuration, weights,config,classes):
     writer.release()
     vs.release()
 
+
+    ######################### Create Bar Figure #########################
     print(frameNumber)
     print(peopleInframe)
-
 
     x_pos = np.arange(len(frameNumber))
     # Create bars and choose color
@@ -773,15 +774,19 @@ def estimate_contact_rate(video,title,userDuration, weights,config,classes):
     locs, labels = plt.xticks()
     plt.setp(labels, rotation=90)
 
+    #Save the figure in the output directory
     nameOfFguir= "C:/Users/Asma/Desktop/Projects/CREstimator_website/frontend/src/components/output/"+videoTitle+".png"
     plt.savefig(nameOfFguir,dpi=400)
 
     figurePath=videoTitle+".png"
-        
+
+    ######################### Calculate the contact rate #########################  
+
+    #Resize the contact matrix
     rows =  s[1:maxID+1, 1:maxID+1]
     print(maxID)
 
-    
+    #Compute the total number of contact 
     AllContact = 0
     for index,r in enumerate(rows):
         contact=0
@@ -791,15 +796,17 @@ def estimate_contact_rate(video,title,userDuration, weights,config,classes):
          
         AllContact += contact
 
-    
+     #Compute the average number of contact 
     average= math.ceil(AllContact/maxID)
             
-            
-    Contact_Rate =9 
-    totalPeople=maxID
+    #Compute the contact rate       
     Contact_Rate= average/int(duration)
-    print(Contact_Rate)
-    format_float = "{:.2f}".format(Contact_Rate)
+
+    #Return the total number of people
+    totalPeople=maxID
+    
+   
+
     return (totalPeople,average,Contact_Rate,outputVideoPath,figurePath,coverPic)
 
 
@@ -812,25 +819,25 @@ async def read_root() -> dict:
 
 ######################################-----GET and POST user information-----######################################
 
-
+#Get all existed users.
 @app.get("/user", tags=["user"])
 async def get_users() -> dict:
     return usersEntity(conn.gradProject.users.find())
 
-
+#Insert new user to the database.
 @app.post("/user", tags=["user"])
 async def add_user(user: dict) -> dict:
     users.append(user)
     user_exists = False
     
-    # Checks if an email exists from the collection of users
+    # Checks if an email exists in the collection of users.
     if conn.gradProject.users.find({'email': user['email']}).count() > 0:
         user_exists = True
         print("User Exists")
         activeuser = conn.gradProject.users.find({'email': user['email']})
         for actuser in activeuser:
             actuser = dict(actuser)
-            # Converted the user ObjectId to str! so this can be stored into a session(how login works)
+            # Converted the user ObjectId to str! 
             actuser['_id'] = str(actuser['_id'])      
         return actuser['_id']
 
@@ -841,18 +848,19 @@ async def add_user(user: dict) -> dict:
         activeuser = conn.gradProject.users.find({'email': user['email']})
         for actuser in activeuser:
             actuser = dict(actuser)
-            # Converted the user ObjectId to str! so this can be stored into a session(how login works)
+            # Converted the user ObjectId to str! 
             actuser['_id'] = str(actuser['_id'])      
         return actuser['_id']
 
 ######################################-----GET and POST video information-----######################################
 
+#Get the user ID.
 def get_user_email(id):
     activeuser = conn.gradProject.users.find()
     activeuser_id=""
     for actuser in activeuser:
         actuser = dict(actuser)
-        # Converted the user ObjectId to str! so this can be stored into a session(how login works)
+        # Converted the user ObjectId to str! 
         activeuser_id= str(actuser['_id'])
         if activeuser_id == id:
             return actuser['email']
@@ -860,22 +868,23 @@ def get_user_email(id):
     return ""
 
 
+#Get all existed videos.
 @app.get("/video", tags=["video"])
 async def get_video() -> dict:
     return videosEntity(conn.gradProject.videos.find())
 
 
-
+#Upload the video to the specified directory then return the video path.
 @app.post("/videoPath")
 async def create_upload_file(file: UploadFile = File(...)):
 
     media = 'C:/Users/Asma/Desktop/Projects/CREstimator_website/frontend/src/components/videos/'+file.filename
     with open(media, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
-    # print(contact_rate)
     return {'C:/Users/Asma/Desktop/Projects/CREstimator_website/frontend/src/components/videos/'+file.filename}
 
 
+#Estimate the value of contact rate then insert the video into the database.
 @app.post("/video", tags=["video"])
 async def add_video(video: dict) -> dict:
     videos.append(video)
@@ -898,7 +907,7 @@ async def add_video(video: dict) -> dict:
     return dict(video)
 
 
-
+#Return all videos that their users have given permission to share.
 @app.get("/card", tags=["card"])
 async def get_cards() -> dict:
     n=videosEntity(conn.gradProject.videos.find())
@@ -911,6 +920,7 @@ async def get_cards() -> dict:
     return m
 
 
+#Return the titles of the existed videos.
 @app.get("/title", tags=["title"])
 async def get_title() -> dict:
     n=videosEntity(conn.gradProject.videos.find())
@@ -920,6 +930,7 @@ async def get_title() -> dict:
     return m
 
 
+#Return a list of the different countries where previous users have uploaded videos.
 @app.get("/countries", tags=["countries"])
 async def get_countries() -> dict:
     n=conn.gradProject.videos.distinct("country")
@@ -933,7 +944,9 @@ async def get_countries() -> dict:
         m.append(country_dictionary)
       
     return m
-    
+
+
+#Send the contact us form to the administrator email.
 @app.post("/contact")
 async def send_email_contact(formMessege: dict) -> dict:
 
